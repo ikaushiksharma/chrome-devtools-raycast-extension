@@ -1,4 +1,4 @@
-import { Action, ActionPanel, List, showToast, Toast, Detail } from "@raycast/api";
+import { Action, ActionPanel, List, showToast, Toast } from "@raycast/api";
 import fetch from "node-fetch";
 import { useEffect, useState } from "react";
 import { DebugTarget } from "../types";
