@@ -31,6 +31,9 @@ const DevtoolsPanel = ({ selectedTarget, targets }: { selectedTarget: string | n
         }),
       );
     });
+    const setLogsWithLimit = (newLog: LogEntry) => {
+      setLogs((prev) => (prev.length > 100 ? [newLog, ...prev.slice(-99)] : [newLog, ...prev]));
+    };
 
     ws.on("message", (rawData) => {
       const data = JSON.parse(rawData.toString());
@@ -38,27 +41,22 @@ const DevtoolsPanel = ({ selectedTarget, targets }: { selectedTarget: string | n
       // Handle Console logs
       if (data.method === "Console.messageAdded") {
         const message = data.params.message;
-        setLogs((prev) => [
-          {
-            type: "console",
-            message: message.text,
-            level: message.level,
-          },
-          ...prev,
-        ]);
+
+        setLogsWithLimit({
+          type: "console",
+          message: message.text,
+          level: message.level,
+        });
       }
 
       // Handle Network requests
       if (data.method === "Network.requestWillBeSent") {
         const request = data.params.request;
-        setLogs((prev) => [
-          {
-            type: "network",
-            url: request.url,
-            method: request.method,
-          },
-          ...prev,
-        ]);
+        setLogsWithLimit({
+          type: "network",
+          url: request.url,
+          method: request.method,
+        });
       }
     });
 
