@@ -3,7 +3,7 @@
   "name": "chrome-devtools",
   "title": "Chrome Devtools",
   "description": "A Raycast extension that fetches and displays Chrome’s console logs and network requests in real time, enabling quick debugging and insights without leaving Raycast.",
-  "icon": "extension-icon.png",
+  "icon": "chrome-devtools-icon.png",
   "author": "ikaushiksharma",
   "categories": [
     "Web",
